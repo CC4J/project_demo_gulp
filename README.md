@@ -46,6 +46,20 @@ ps：使用该模板的方式是新建一个自己的项目如==myproject==，�
 
 node安装成功后，打开命令行工具，进入项目==myproject==路径下，输入指令`npm install`，开始安装相关依赖模块。安装结束后检查项目中是否出现==node_modules==文件夹，若有则表明安装成功。
 
+### 修改gulp-asset-rev模块
+
+安装完依赖模块后，打开==node-modules/gulp-asset-rev/index.js==文件，找到78行代码
+```js
+var verStr = (options.verConnecter || "-") + md5;
+src = src.replace(verStr, '').replace(/(\.[^\.]+)$/, verStr + "$1");
+```
+修改为：
+```js
+var verStr = (options.verConnecter || "") + md5;
+src = src + "?v=" + verStr;
+```
+代码修改完毕后，gulp就能顺利为我们添加版本号了，nice！
+
 ### 项目编码
 
 以上步骤完成后即可开始在==src==路径下进行编码工作
